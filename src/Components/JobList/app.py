@@ -12,12 +12,12 @@ def recommendation(title):
     st.write("Selected Job Title:", title)
 
     # Ensure correct column name
-    if 'Job Title' not in df.columns:
+    if 'Role' not in df.columns:
         st.error("Column 'Job Title' not found in DataFrame. Check column names!")
         return []
 
     # Get index of selected job title
-    idx = df[df['Job Title'] == title].index[0]
+    idx = df[df['Role'] == title].index[0]
     idx = df.index.get_loc(idx)
 
     # Get similar job recommendations
@@ -26,15 +26,15 @@ def recommendation(title):
     jobs = []
     for i in distances:
         # Use correct column name instead of '.Title'
-        jobs.append(df.iloc[i[0]]['Job Title'])
+        jobs.append(df.iloc[i[0]]['Role'])
 
     return jobs
 
 st.title('Job Recommendation System')
 
 # Ensure correct column reference
-if 'Job Title' in df.columns:
-    title = st.selectbox('Search for a job:', df['Job Title'].tolist())
+if 'Role' in df.columns:
+    title = st.selectbox('Search for a job:', df['Role'].tolist())
     jobs = recommendation(title)
 
     if jobs:

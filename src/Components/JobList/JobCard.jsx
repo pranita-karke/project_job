@@ -15,7 +15,7 @@ const JobCard = ({ job }) => {
       <p>
         <strong>Qualifications:</strong> {job["Qualifications"]}
       </p>
-      <p>
+      {/* <p>
         <strong>Salary:</strong> {job["Salary Range"]}
       </p>
       <p>
@@ -23,7 +23,7 @@ const JobCard = ({ job }) => {
       </p>
       <p>
         <strong>Work Type:</strong> {job["Work Type"]}
-      </p>
+      </p> */}
     </div>
   );
 };
