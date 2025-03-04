@@ -172,6 +172,7 @@ const LoginForm = ({ setIsRegistering, setIsLoggedIn }) => {
           onSuccess={handleLoginSuccess}
           onError={handleLoginFailure}
         />
+        <br />
         <p>
           Don't have an account?{" "}
           <span
@@ -187,3 +188,5 @@ const LoginForm = ({ setIsRegistering, setIsLoggedIn }) => {
 };
 
 export default LoginForm;
+
+

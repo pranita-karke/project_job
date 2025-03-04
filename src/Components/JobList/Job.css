@@ -88,6 +88,38 @@ h1 {
   background-color: #df5746;
 }
 
+.cv-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-right: 10px;
+}
+
+.cv-btn:hover {
+  background-color: #df5746;
+}
+
+.recommendation-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-right: 10px;
+}
+
+.recommendation-btn:hover {
+  background-color: #df5746;
+}
+
 /* Job List */
 h1 {
   text-align: center;
@@ -147,9 +179,4 @@ h1 {
 
 .search-container input:focus {
   border-color: #ff725e;
-}
-
-
-.recommendation-btn{
-  background-color: red;
 }

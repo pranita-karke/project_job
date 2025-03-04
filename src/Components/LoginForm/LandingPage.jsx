@@ -33,6 +33,7 @@
 import React from "react";
 import "./LandingPage.css";
 import imageSrc from "../Assets/xyz.png"; // Replace with your actual image path
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = ({ onLoginClick }) => {
   return (
@@ -60,6 +61,7 @@ const LandingPage = ({ onLoginClick }) => {
       <div className="image-section">
         <img src={imageSrc} alt="Job Search Illustration" />
       </div>
+      
     </div>
   );
 };

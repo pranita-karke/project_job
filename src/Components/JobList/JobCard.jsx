@@ -94,3 +94,5 @@ const JobCard = ({ job }) => {
 };
 
 export default JobCard;
+
+
