@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
   background-color: #333;
   color: white;
   padding: 15px;
@@ -37,6 +37,7 @@ h1 {
 
 .job-card {
   border: 1px solid #ddd;
+  border-radius: 25px;
   padding: 20px;
   width: 250px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -58,4 +59,97 @@ h1 {
 
 .search-container input:focus {
   border-color: #007bff;
+} */
+
+/* Navbar  YO CHALNE WALLALALALLALALAALLALLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+.navbar {
+  background-color: #fff5eb;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+.logout-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: #df5746;
+}
+
+/* Job List */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 job cards per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .job-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .job-list {
+    grid-template-columns: repeat(1, 1fr); /* 1 per row for mobile */
+  }
+}
+
+/* Job Card */
+.job-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Search Bar */
+.search-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-container input:focus {
+  border-color: #ff725e;
+}
+
+
+.recommendation-btn{
+  background-color: red;
 }
