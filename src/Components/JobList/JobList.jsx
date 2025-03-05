@@ -53,38 +53,37 @@ import "./Job.css"; // Ensure CSS is applied
 
 const Navbar = () => {
   return (
-                  <nav className="navbar">
-                    <h1 style={{ color: "#ff725e", fontSize: "40px"}}>Job Portal</h1>
-                    <div className="nav-buttons">
-                      {/* Job Recommendation Button */}
-                      <button
-                        className="cv-btn"
-                        onClick={() => {
-                          window.location.href = "http://localhost:5000"; // This will navigate to Streamlit directly in the same tab
-                        }}
-                      >
-                        Upload your CV
-                      </button>
-                      {/* Job Recommendation Button */}
-                      <button
-                        className="recommendation-btn"
-                        onClick={() => {
-                          window.location.href = "http://localhost:8501"; // This will navigate to Streamlit directly in the same tab
-                        }}
-                      >
-                        Get Job Recommendations
-                      </button>
-                      <button className="logout-btn"
-                        onClick={() => {
-                          window.location.href = "http://localhost:3000"; // This will navigate to Streamlit directly in the same tab
-                        }}>
-                        Logout
-                      </button>
-                     
-                    </div>
-                  </nav>
-                  
-               
+    <nav className="navbar">
+      <h1 style={{ color: "#ff725e", fontSize: "40px" }}>Job Portal</h1>
+      <div className="nav-buttons">
+        {/* Job Recommendation Button */}
+        <button
+          className="cv-btn"
+          onClick={() => {
+            window.location.href = "http://localhost:5000"; // This will navigate to Streamlit directly in the same tab
+          }}
+        >
+          Upload your CV
+        </button>
+        {/* Job Recommendation Button */}
+        <button
+          className="recommendation-btn"
+          onClick={() => {
+            window.location.href = "http://localhost:8501"; // This will navigate to Streamlit directly in the same tab
+          }}
+        >
+          Get Job Recommendations
+        </button>
+        <button
+          className="logout-btn"
+          onClick={() => {
+            window.location.href = "http://localhost:3000"; // This will navigate to Streamlit directly in the same tab
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    </nav>
   );
 };
 
@@ -102,7 +101,7 @@ const JobList = () => {
   const filteredJobs = jobs.filter((job) => {
     const lowercasedQuery = searchQuery.toLowerCase();
     return (
-      job["Role"].toLowerCase().includes(lowercasedQuery) ||
+      // job["Role"].toLowerCase().includes(lowercasedQuery) ||
       job["Qualifications"].toLowerCase().includes(lowercasedQuery)
     );
   });
@@ -116,7 +115,7 @@ const JobList = () => {
       <div className="search-container">
         <input
           type="text"
-          placeholder="Search by Role or Qualification"
+          placeholder="Search by Qualification"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -135,6 +134,3 @@ const JobList = () => {
 };
 
 export default JobList;
-
-
-

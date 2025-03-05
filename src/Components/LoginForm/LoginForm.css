@@ -476,6 +476,32 @@ body {
   text-align: center;
 }
 
+.input-box input {
+  width: 100%;
+  padding: 10px 40px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.input-box .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff725e;
+}
+
+.login-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 h2 {
   margin-bottom: 20px;
   color: #333;

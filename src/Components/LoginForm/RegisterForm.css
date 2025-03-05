@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f6;
+  background-size: cover;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: url("../Assets/office.png") no-repeat center center;
+  background-size: cover;
+  backdrop-filter: blur(5px);
+}
+
+.register-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 40px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.input-box .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff725e;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e25a4d;
+}
+
+.message {
+  margin-top: 15px;
+  color: #e25a4d;
+  font-size: 0.9rem;
+}
+
+.login-link {
+  margin-top: 20px;
+}
+
+.login-link-text {
+  color: #ff725e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-link-text:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-box {
+    width: 85%;
+    max-width: 300px;
+  }
+}

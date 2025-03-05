@@ -161,7 +161,7 @@ h1 {
   transform: translateY(-5px);
 }
 
-/* Search Bar */
+/* Search Bar
 .search-container {
   margin: 20px 0;
   display: flex;
@@ -179,5 +179,27 @@ h1 {
 
 .search-container input:focus {
   border-color: #ff725e;
+} */
+
+/* Search Bar */
+.search-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
+.search-container input {
+  padding: 10px;
+  width: 80%; /* Make the input flexible and responsive */
+  max-width: 400px; /* Max width to avoid it being too large */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-container input:focus {
+  border-color: #ff725e;
+}

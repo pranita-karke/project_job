@@ -150,27 +150,82 @@
 
 // export default LoginForm;
 
-import React from "react";
+import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
+// import { FaUser, FaLock } from "react-icons/fa";
 import "./LoginForm.css";
 
 const LoginForm = ({ setIsRegistering, setIsLoggedIn }) => {
-  const handleLoginSuccess = (response) => {
-    console.log("Login Successful:", response);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    try {
+      const response = await fetch("http://localhost/project_job/login.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setMessage(data.message || data.error);
+
+      if (data.success) {
+        setIsLoggedIn(true);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setMessage("An error occurred during login.");
+    }
+  };
+
+  const handleGoogleLoginSuccess = (response) => {
+    console.log("Google Login Successful:", response);
     setIsLoggedIn(true);
   };
 
-  const handleLoginFailure = (error) => {
-    console.error("Login Failed:", error);
+  const handleGoogleLoginFailure = (error) => {
+    console.error("Google Login Failed:", error);
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h2 style={{ color: "#ff725e" }}>Login</h2>
+        <form onSubmit={handleLogin}>
+          <div className="input-box">
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {/* <FaUser className="icon" /> */}
+          </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* <FaLock className="icon" /> */}
+          </div>
+          
+          <button className="login-btn" type="submit">Login</button>
+          <p>{message}</p>
+        </form>
+        <br />
         <GoogleLogin
-          onSuccess={handleLoginSuccess}
-          onError={handleLoginFailure}
+          onSuccess={handleGoogleLoginSuccess}
+          onError={handleGoogleLoginFailure}
         />
         <br />
         <p>
@@ -188,5 +243,3 @@ const LoginForm = ({ setIsRegistering, setIsLoggedIn }) => {
 };
 
 export default LoginForm;
-
-

@@ -45,8 +45,8 @@ const LandingPage = ({ onLoginClick }) => {
           Jobs that match <span className="highlight">your passion.</span>
         </h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam
-          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.
+          Unlock your career potential with personalized job matches. Discover
+          opportunities that align with your skills and experience effortlessly.
         </p>
         <div className="buttons-container">
           <button className="btn primary-btn" onClick={onLoginClick}>
@@ -61,7 +61,6 @@ const LandingPage = ({ onLoginClick }) => {
       <div className="image-section">
         <img src={imageSrc} alt="Job Search Illustration" />
       </div>
-      
     </div>
   );
 };

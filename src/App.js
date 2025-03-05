@@ -145,7 +145,6 @@
 
 // export default App;
 
-
 /* Updated App.js */
 
 // import { useState } from "react";
@@ -164,7 +163,7 @@
 //     setShowLogin(true); // Show login form when the login button is clicked
 //   };
 
-//   return (  
+//   return (
 //     // Wrap your app with GoogleOAuthProvider
 //     <GoogleOAuthProvider clientId="942562143186-7rf5vfv690pokpdv6teoj2k3a4u08qqi.apps.googleusercontent.com">
 //       <div className="App">
@@ -194,8 +193,6 @@
 //           <div>
 //             <nav className="navbar">
 //               <h1 style={{ color: "#ff725e", fontSize: "40px"}}>Job Portal</h1>
-
-              
 
 //               <div className="nav-buttons">
 
@@ -257,70 +254,75 @@ function App() {
     setShowLogin(true); // Show login form when the login button is clicked
   };
 
-  return (  
+  return (
     // Wrap your app with GoogleOAuthProvider
     <GoogleOAuthProvider clientId="942562143186-7rf5vfv690pokpdv6teoj2k3a4u08qqi.apps.googleusercontent.com">
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={
-              !isLoggedIn ? (
-                <div>
-                  {!showLogin ? (
-                    <LandingPage onLoginClick={handleLoginClick} />
-                  ) : (
-                    <>
-                      {isRegistering ? (
-                        <RegisterForm
-                          setIsRegistering={setIsRegistering}
-                          setIsLoggedIn={setIsLoggedIn}
-                        />
-                      ) : (
-                        <LoginForm
-                          setIsRegistering={setIsRegistering}
-                          setIsLoggedIn={setIsLoggedIn} // Pass the setIsLoggedIn prop
-                        />
-                      )}
-                    </>
-                  )}
-                </div>
-              ) : (
-                <div>
-                  <nav className="navbar">
-                    <h1 style={{ color: "#ff725e", fontSize: "40px"}}>Job Portal</h1>
-                    <div className="nav-buttons">
-                      {/* Job Recommendation Button */}
-                      <button
-                        className="cv-btn"
-                        onClick={() => {
-                          window.location.href = "http://localhost:5000"; // This will navigate to Streamlit directly in the same tab
-                        }}
-                      >
-                        Upload your CV
-                      </button>
-                      {/* Job Recommendation Button */}
-                      <button
-                        className="recommendation-btn"
-                        onClick={() => {
-                          window.location.href = "http://localhost:8501"; // This will navigate to Streamlit directly in the same tab
-                        }}
-                      >
-                        Get Job Recommendations
-                      </button>
-                      {/* Logout Button */}
-                      <button
-                        className="logout-btn"
-                        onClick={() => setIsLoggedIn(false)}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </nav>
-                  <h1>Job Listings</h1>
-                  <JobList />
-                </div>
-              )
-            } />
+            <Route
+              path="/"
+              element={
+                !isLoggedIn ? (
+                  <div>
+                    {!showLogin ? (
+                      <LandingPage onLoginClick={handleLoginClick} />
+                    ) : (
+                      <>
+                        {isRegistering ? (
+                          <RegisterForm
+                            setIsRegistering={setIsRegistering}
+                            setIsLoggedIn={setIsLoggedIn}
+                          />
+                        ) : (
+                          <LoginForm
+                            setIsRegistering={setIsRegistering}
+                            setIsLoggedIn={setIsLoggedIn} // Pass the setIsLoggedIn prop
+                          />
+                        )}
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    <nav className="navbar">
+                      <h1 style={{ color: "#ff725e", fontSize: "40px" }}>
+                        Job Portal
+                      </h1>
+                      <div className="nav-buttons">
+                        {/* Job Recommendation Button */}
+                        <button
+                          className="cv-btn"
+                          onClick={() => {
+                            window.location.href = "http://localhost:5000"; // This will navigate to Streamlit directly in the same tab
+                          }}
+                        >
+                          Upload your CV
+                        </button>
+                        {/* Job Recommendation Button */}
+                        <button
+                          className="recommendation-btn"
+                          onClick={() => {
+                            window.location.href = "http://localhost:8501"; // This will navigate to Streamlit directly in the same tab
+                          }}
+                        >
+                          Get Job Recommendations
+                        </button>
+                        {/* Logout Button */}
+                        <button
+                          className="logout-btn"
+                          onClick={() => setIsLoggedIn(false)}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </nav>
+                    <h1>Job Listings</h1>
+                    <JobList />
+                  </div>
+                )
+              }
+            />
             <Route path="/jobs" element={<JobList />} />
           </Routes>
         </div>
@@ -330,8 +332,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
