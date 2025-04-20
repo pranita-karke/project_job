@@ -246,6 +246,10 @@ import CompanyDashboard from "./Components/Company/comlanding";
 import CompanyJobList from "./Components/Company/jobslist";
 import JobList from "./Components/JobList/JobList";
 import AddJob from "./Components/Company/AddJob";
+import AllVacancies from "./Components/JobList/AllVacancies";
+import ApplyForm from "./Components/JobList/ApplyForm";
+import ApplicationsList from "./Components/Company/ApplicationsList";
+import AdminPanel from "./Components/Admin/AdminPanel";
 import { GoogleOAuthProvider } from "@react-oauth/google"; // Import the Google OAuth provider
 
 function App() {
@@ -330,6 +334,10 @@ function App() {
             <Route path="/company-jobs" element={<CompanyJobList />} />
             <Route path="/jobs" element={<JobList />} />
             <Route path="/add-job" element={<AddJob />} />
+            <Route path="/view-vacancies" element={<AllVacancies />} />
+            <Route path="/apply-form" element={<ApplyForm />} />
+            <Route path="/AdminPanel" element={<AdminPanel />} />
+            <Route path="/applications" element={<ApplicationsList />} />
           </Routes>
         </div>
       </Router>

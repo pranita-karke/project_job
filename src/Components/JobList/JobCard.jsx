@@ -99,7 +99,7 @@
 import React, { useState } from "react";
 import "./Job.css";
 
-const JobCard = ({ job }) => {
+const UserJobCard = ({ job }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -114,6 +114,9 @@ const JobCard = ({ job }) => {
       >
         {job["Job Title"]}
       </h2>
+
+      {/* Display the Company Name */}
+      <h4 style={{ textAlign: "center" }}>{job["Company Name"]}</h4>
 
       {isHovered ? (
         <p className="job-description">
@@ -134,4 +137,4 @@ const JobCard = ({ job }) => {
   );
 };
 
-export default JobCard;
+export default UserJobCard;

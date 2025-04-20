@@ -48,7 +48,8 @@
 // export default JobList;
 
 import React, { useEffect, useState } from "react";
-import JobCard from "./JobCard";
+import { Link } from "react-router-dom"; // Import Link
+import UserJobCard from "./JobCard";
 import "./Job.css"; // Ensure CSS is applied
 
 const Navbar = () => {
@@ -82,6 +83,11 @@ const Navbar = () => {
         >
           Logout
         </button>
+
+        {/* Add View Vacancies Button */}
+        <Link to="/view-vacancies">
+          <button className="view-vacancies-btn">View Vacancies</button>
+        </Link>
       </div>
     </nav>
   );
@@ -124,7 +130,9 @@ const JobList = () => {
       {/* Display Filtered Jobs */}
       <div className="job-list">
         {filteredJobs.length > 0 ? (
-          filteredJobs.map((job, index) => <JobCard key={index} job={job} />)
+          filteredJobs.map((job, index) => (
+            <UserJobCard key={index} job={job} />
+          ))
         ) : (
           <p>No jobs found.</p>
         )}

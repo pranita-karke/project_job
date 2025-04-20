@@ -71,16 +71,23 @@
 // JobList.js (Updated)
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import JobCard from "./jobscard";
+import CompanyJobCard from "./jobscard";
 import "../JobList/Job.css"; // Ensure styling
 
 const Navbar = ({ onAddClick }) => {
+  const navigate = useNavigate();
   return (
     <nav className="navbar">
       <h1 style={{ color: "#ff725e", fontSize: "40px" }}>Job Portal</h1>
       <div className="nav-buttons">
         <button className="add-btn" onClick={onAddClick}>
           Add Job
+        </button>
+        <button
+          className="application-btn"
+          onClick={() => navigate("/applications")}
+        >
+          Applications
         </button>
         <button
           className="logout-btn"
@@ -130,7 +137,9 @@ const JobList = () => {
       {/* Job List */}
       <div className="job-list">
         {filteredJobs.length > 0 ? (
-          filteredJobs.map((job, index) => <JobCard key={index} job={job} />)
+          filteredJobs.map((job, index) => (
+            <CompanyJobCard key={index} job={job} />
+          ))
         ) : (
           <p>No jobs found.</p>
         )}
