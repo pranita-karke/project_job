@@ -71,8 +71,10 @@ const CompanyJobCard = ({ job }) => {
   const openVacancy = () => {
     setLoading(true);
 
+    const companyName = localStorage.getItem("companyName");
+
     const vacancyData = {
-      company: job.CompanyName || job["Company Name"] || "Default Company",
+      company: companyName || "Default Company",
       title: job["Job Title"],
       role: job["Role"],
       qualifications: job["Qualifications"],

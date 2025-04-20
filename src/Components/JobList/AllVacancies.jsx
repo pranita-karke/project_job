@@ -42,6 +42,9 @@ const AllVacancies = () => {
             >
               <h3>{vacancy.companyName}</h3>
               <p>
+                <strong>Company:</strong> {vacancy.company}
+              </p>
+              <p>
                 <strong>Role:</strong> {vacancy.role}
               </p>
               <p>
