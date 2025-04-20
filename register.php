@@ -7,59 +7,58 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Enable Error Reporting (for debugging)
+// Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if the request method is POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Check if required fields are provided
-    if (isset($_POST['fullname'], $_POST['username'], $_POST['password'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['fullname'], $_POST['username'], $_POST['password'], $_POST['role'])) {
 
-        // Sanitize input to prevent SQL Injection
         $fullname = htmlspecialchars(strip_tags($_POST['fullname']));
         $username = htmlspecialchars(strip_tags($_POST['username']));
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $role = htmlspecialchars(strip_tags($_POST['role']));
 
-        // Check if the username already exists
+        // Validate role
+        if (!in_array($role, ['user', 'company'])) {
+            echo json_encode(["error" => "Invalid role selected!"]);
+            exit();
+        }
+
+        // Optional company info (set to null if not provided)
+        $companyName = isset($_POST['companyName']) ? htmlspecialchars(strip_tags($_POST['companyName'])) : null;
+        $companyDescription = isset($_POST['companyDescription']) ? htmlspecialchars(strip_tags($_POST['companyDescription'])) : null;
+
+        // Check if username already exists
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            // Username exists
             echo json_encode(["error" => "Username already exists!"]);
             $stmt->close();
             $conn->close();
             exit();
         }
+        $stmt->close();
 
-        // Prepare SQL statement to insert user
-        $stmt = $conn->prepare("INSERT INTO users (fullname, username, password) VALUES (?, ?, ?)");
-        if (!$stmt) {
-            echo json_encode(["error" => "Database error: " . $conn->error]);
-            exit();
-        }
+        // Insert into users table (including optional company fields)
+        $stmt = $conn->prepare("INSERT INTO users (fullname, username, password, role, companyName, companyDescription) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $fullname, $username, $password, $role, $companyName, $companyDescription);
 
-        $stmt->bind_param("sss", $fullname, $username, $password);
-
-        // Execute query and return appropriate response
         if ($stmt->execute()) {
-            echo json_encode(["message" => "Registration successful!"]);
+            echo json_encode(["message" => "Registration successful!", "success" => true]);
         } else {
-            echo json_encode(["error" => "Failed to register user!"]);
+            echo json_encode(["error" => "Failed to register user: " . $stmt->error]);
         }
 
-        // Close statement & connection
         $stmt->close();
         $conn->close();
-        
+
     } else {
         echo json_encode(["error" => "Missing required fields!"]);
     }
-
 } else {
     echo json_encode(["error" => "Invalid request method!"]);
 }

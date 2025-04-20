@@ -1,58 +1,71 @@
 <?php
 include 'db.php';
 
-// Enable CORS
+// Clean any previous output
+ob_clean();
+
+// CORS + Headers
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Enable Error Reporting (for debugging)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if request method is POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Check if required fields exist
-    if (isset($_POST['username'], $_POST['password'])) {
-        
-        // Sanitize inputs to prevent SQL injection
-        $username = htmlspecialchars(strip_tags($_POST['username']));
-        $password = $_POST['password'];
+$response = [];
 
-        // Prepare SQL statement
-        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-        if (!$stmt) {
-            echo json_encode(["error" => "Database error: " . $conn->error]);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!isset($_POST['username'], $_POST['password'], $_POST['role'])) {
+        echo json_encode(["error" => "Missing required fields!"]);
+        exit();
+    }
+
+    $username = htmlspecialchars(strip_tags($_POST['username']));
+    $password = $_POST['password'];
+    $role = htmlspecialchars(strip_tags($_POST['role']));
+
+    $stmt = $conn->prepare("SELECT password, role, companyName, companyDescription FROM users WHERE username = ?");
+    if (!$stmt) {
+        echo json_encode(["error" => "Database error: " . $conn->error]);
+        exit();
+    }
+
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows === 1) {
+        $stmt->bind_result($hashed_password, $db_role, $companyName, $companyDescription);
+        $stmt->fetch();
+
+        if ($role !== $db_role) {
+            echo json_encode(["error" => "Incorrect role selected!"]);
             exit();
         }
 
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->bind_result($hashed_password);
-        
-        if ($stmt->fetch()) {
-            // Close statement before checking password to avoid issues
-            $stmt->close();
-
-            // Verify password
-            if (password_verify($password, $hashed_password)) {
-                echo json_encode(["message" => "Login successful!", "success" => true]);  // Add success flag
-            } else {
-                echo json_encode(["error" => "Invalid username or password!"]);
-            }
+        if (password_verify($password, $hashed_password)) {
+            $response = [
+                "success" => true,
+                "message" => "Login successful!",
+                "role" => $db_role,
+                "username" => $username,
+                "company_name" => $companyName ?? "",
+                "company_description" => $companyDescription ?? ""
+            ];
         } else {
-            echo json_encode(["error" => "User not found!"]);
+            $response = ["error" => "Invalid password!"];
         }
-
-        $conn->close();
-        
     } else {
-        echo json_encode(["error" => "Missing required fields!"]);
+        $response = ["error" => "User not found!"];
     }
 
+    $stmt->close();
+    $conn->close();
 } else {
-    echo json_encode(["error" => "Invalid request method!"]);
+    $response = ["error" => "Invalid request method!"];
 }
+
+echo json_encode($response);
+exit();
 ?>
