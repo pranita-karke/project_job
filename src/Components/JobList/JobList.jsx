@@ -48,29 +48,28 @@
 // export default JobList;
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import UserJobCard from "./JobCard";
-import "./Job.css"; // Ensure CSS is applied
+import "./Job.css";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <h1 style={{ color: "#ff725e", fontSize: "40px" }}>Job Portal</h1>
       <div className="nav-buttons">
-        {/* Job Recommendation Button */}
         <button
           className="cv-btn"
           onClick={() => {
-            window.location.href = "http://localhost:5000"; // This will navigate to Streamlit directly in the same tab
+            window.location.href = "http://localhost:5000";
           }}
         >
           Upload your CV
         </button>
-        {/* Job Recommendation Button */}
+
         <button
           className="recommendation-btn"
           onClick={() => {
-            window.location.href = "http://localhost:8501"; // This will navigate to Streamlit directly in the same tab
+            window.location.href = "http://localhost:8501";
           }}
         >
           Get Job Recommendations
@@ -78,13 +77,12 @@ const Navbar = () => {
         <button
           className="logout-btn"
           onClick={() => {
-            window.location.href = "http://localhost:3000"; // This will navigate to Streamlit directly in the same tab
+            window.location.href = "http://localhost:3000";
           }}
         >
           Logout
         </button>
 
-        {/* Add View Vacancies Button */}
         <Link to="/view-vacancies">
           <button className="view-vacancies-btn">View Vacancies</button>
         </Link>
@@ -106,18 +104,13 @@ const JobList = () => {
 
   const filteredJobs = jobs.filter((job) => {
     const lowercasedQuery = searchQuery.toLowerCase();
-    return (
-      // job["Role"].toLowerCase().includes(lowercasedQuery) ||
-      job["Qualifications"].toLowerCase().includes(lowercasedQuery)
-    );
+    return job["Qualifications"].toLowerCase().includes(lowercasedQuery);
   });
 
   return (
     <div>
-      {/* Include Navbar at the top */}
       <Navbar />
 
-      {/* Search Input */}
       <div className="search-container">
         <input
           type="text"
@@ -125,9 +118,9 @@ const JobList = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <button className="search-btn">Search</button>
       </div>
 
-      {/* Display Filtered Jobs */}
       <div className="job-list">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job, index) => (

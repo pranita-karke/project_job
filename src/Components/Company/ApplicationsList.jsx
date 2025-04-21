@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import "../JobList/Job.css"; // Optional styling reuse
+import "../JobList/Job.css";
 
 const ApplicationsList = () => {
+  const companyName = localStorage.getItem("companyName");
+
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/get-applications")
-      .then((response) => response.json())
-      .then((data) => setApplications(data))
-      .catch((error) => console.error("Error loading applications:", error));
-  }, []);
+    if (companyName) {
+      fetch(
+        `http://localhost:5001/get-applications?companyName=${encodeURIComponent(
+          companyName
+        )}`
+      )
+        .then((response) => response.json())
+        .then((data) => setApplications(data))
+        .catch((error) => console.error("Error loading applications:", error));
+    }
+  }, [companyName]);
 
   return (
     <div className="application-list-container">
@@ -23,11 +31,10 @@ const ApplicationsList = () => {
               <h3>Name: {app.name}</h3>
               <p>Role: {app.role}</p>
 
-              {/* View CV */}
               <a
                 href={`http://localhost:5001/uploads/${app.cv_path
                   .split("/")
-                  .pop()}`} // Correct path
+                  .pop()}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

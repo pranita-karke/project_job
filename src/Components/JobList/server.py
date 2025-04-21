@@ -263,17 +263,17 @@ import pandas as pd
 import os
 from werkzeug.utils import secure_filename
 import traceback
+import mysql.connector
 
 app = Flask(__name__)
 CORS(app)
 
-# Excel file paths
+
 JOB_RECORD = os.path.join(os.getcwd(), 'jobrecord.xlsx')
 VACANCIES_FILE = os.path.join(os.getcwd(), 'vacancies.xlsx')
 APPLICATIONS_FILE = os.path.join(os.getcwd(), 'src', 'Components', 'JobList', 'applications.xlsx')
 
 
-# Upload folder for CVs
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'src', 'Components', 'JobList', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -329,10 +329,15 @@ def get_vacancies():
 @app.route('/apply-job', methods=['POST'])
 def apply_job():
     try:
-        name = request.form['name']
-        role = request.form['role']
-        company = request.form['company']
-        cv = request.files['cv']
+       
+        name = request.form.get('name')
+        role = request.form.get('role')
+        company = request.form.get('company')  
+        cv = request.files.get('cv')
+
+       
+        if not all([name, role, company, cv]):
+            return jsonify({'error': 'Missing required fields (name, role, company, or CV)'}), 400
 
         print("== Received Application ==")
         print("Name:", name)
@@ -340,10 +345,7 @@ def apply_job():
         print("Company:", company)
         print("CV File:", cv.filename)
 
-        if not cv:
-            return jsonify({'error': 'CV not uploaded'}), 400
-
-        # Sanitize filename
+    
         filename = secure_filename(f"{name}_{cv.filename}")
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
@@ -357,12 +359,14 @@ def apply_job():
             'cv_path': filename
         }
 
+       
         if os.path.exists(APPLICATIONS_FILE):
             df = pd.read_excel(APPLICATIONS_FILE)
             df = pd.concat([df, pd.DataFrame([application_data])], ignore_index=True)
         else:
             df = pd.DataFrame([application_data])
 
+      
         df.to_excel(APPLICATIONS_FILE, index=False)
         return jsonify({'message': 'Application submitted successfully!'}), 200
 
@@ -373,14 +377,54 @@ def apply_job():
 
 @app.route('/get-applications', methods=['GET'])
 def get_applications():
-    if os.path.exists(APPLICATIONS_FILE):
+    try:
+        company_name = request.args.get('companyName')  
         df = pd.read_excel(APPLICATIONS_FILE)
-        return df.to_json(orient='records')
-    else:
-        return jsonify([]), 200
+
+        if company_name:
+            
+            df = df[df['company'] == company_name]
+
+        applications = df.to_dict(orient='records')
+        return jsonify(applications), 200
+    except Exception as e:
+        print("Error occurred while fetching applications:")
+        traceback.print_exc()
+        return jsonify({'error': f"Internal server error: {str(e)}"}), 500
+
+@app.route('/get-company-description', methods=['GET'])
+def get_company_description():
+    try:
+        company_name = request.args.get('companyName')
+        if not company_name:
+            return jsonify({'error': 'Company name is required'}), 400
+
+      
+        connection = mysql.connector.connect(
+            host='localhost', 
+            database='user_db', 
+            user='root', 
+            password=''
+        )
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT companyDescription FROM users WHERE companyName = %s", (company_name,))
+        result = cursor.fetchone()
+
+        if result:
+            return jsonify({'description': result['companyDescription']}), 200
+        else:
+            return jsonify({'error': 'Company not found'}), 404
+    except Exception as e:
+        print(f"Error fetching company description: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
+
 
 
 

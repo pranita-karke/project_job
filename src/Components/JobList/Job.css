@@ -116,6 +116,41 @@ h1 {
   margin-right: 10px;
 }
 
+.view-vacancies-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-right: 10px;
+}
+.application-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-right: 10px;
+}
+
+.add-btn {
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-right: 10px;
+}
+
 .recommendation-btn:hover {
   background-color: #df5746;
 }
@@ -161,48 +196,37 @@ h1 {
   transform: translateY(-5px);
 }
 
-/* Search Bar
+
 .search-container {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.search-container input {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  outline: none;
-}
-
-.search-container input:focus {
-  border-color: #ff725e;
-} */
-
-/* Search Bar */
-.search-container {
-  margin: 20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 20px;
 }
 
 .search-container input {
   padding: 10px;
-  width: 80%; /* Make the input flexible and responsive */
-  max-width: 400px; /* Max width to avoid it being too large */
-  border: 1px solid #ddd;
-  border-radius: 8px;
   font-size: 16px;
-  outline: none;
+  width: 300px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.search-container input:focus {
-  border-color: #ff725e;
+.search-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
+
+.search-btn:hover {
+  background-color: #e75e4d;
+}
+
 .job-buttons {
   display: flex;
   justify-content: center;
@@ -235,4 +259,115 @@ h1 {
 
 .save-button:hover {
   background-color: #0056b3;
+}
+
+.application-list-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.application-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.application-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.application-card:hover {
+  transform: scale(1.03);
+}
+
+.application-card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.application-card p {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.application-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: white;
+  background-color: #ff725e;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.application-card a:hover {
+  background-color: #e55c4d;
+}
+
+.job-form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.job-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff725e;
+}
+
+.job-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.job-form input,
+.job-form textarea {
+  margin-bottom: 15px;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.job-form input:focus,
+.job-form textarea:focus {
+  outline: none;
+  border-color: #ff725e;
+  box-shadow: 0 0 5px rgba(255, 114, 94, 0.4);
+}
+
+.job-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.job-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #ff725e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.job-form button:hover {
+  background-color: #e55c4d;
 }

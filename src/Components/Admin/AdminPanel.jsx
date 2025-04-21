@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./AdminPanel.css"; // Make sure to create a separate CSS file for styling
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
@@ -63,11 +64,11 @@ const AdminPanel = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="admin-panel-container">
       <h2>Admin Panel - Manage Users</h2>
 
       {/* Form for Adding/Editing Users */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="user-form">
         <input
           placeholder="Username"
           value={form.username}
@@ -104,9 +105,7 @@ const AdminPanel = () => {
       </form>
 
       {/* Display Users in a Table */}
-      <table
-        style={{ width: "100%", marginTop: "1rem", border: "1px solid #ddd" }}
-      >
+      <table className="user-table">
         <thead>
           <tr>
             <th>Username</th>

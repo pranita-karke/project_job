@@ -31,8 +31,8 @@ def add_user():
     data = request.json
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO users (fullname, username, password, role, companyName, companyDescription) VALUES (%s, %s, %s, %s, %s, %s)",
-                   (data['fullname'], data['username'], data['password'], data['role'], data['companyName'], data['companyDescription']))
+    cursor.execute("INSERT INTO users (username, password, role, companyName, companyDescription) VALUES (%s, %s, %s, %s, %s)",
+                   (data['username'], data['password'], data['role'], data['companyName'], data['companyDescription']))
     conn.commit()
     cursor.close()
     conn.close()
@@ -44,8 +44,8 @@ def update_user(id):
     data = request.json
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("UPDATE users SET fullname=%s, username=%s, password=%s, role=%s, companyName=%s, companyDescription=%s WHERE id=%s",
-                   (data['fullname'], data['username'], data['password'], data['role'], data['companyName'], data['companyDescription'], id))
+    cursor.execute("UPDATE users SET username=%s, password=%s, role=%s, companyName=%s, companyDescription=%s WHERE id=%s",
+                   (data['username'], data['password'], data['role'], data['companyName'], data['companyDescription'], id))
     conn.commit()
     cursor.close()
     conn.close()

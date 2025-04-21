@@ -1,0 +1,81 @@
+/* AdminPanel.css */
+.admin-panel-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-form input,
+.user-form select,
+.user-form textarea,
+.user-form button {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.user-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.user-form button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.user-form button:hover {
+  background-color: #45a049;
+}
+
+.user-table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f4f4f4;
+}
+
+.user-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.user-table button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.user-table button:hover {
+  background-color: #e53935;
+}
